@@ -1,0 +1,17 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: darkgrey;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+}
+
+main {
+  width: auto;
+  height: 100%;
+  margin: auto;
+  /*border: 5px solid white;*/
+}
