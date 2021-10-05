@@ -19,10 +19,12 @@ class wave {
         this.amp = amp
     }
 
+    update() {
+        // We should update angle.
+        this.angle += 1
+    }
+
     show() {
-        // We should update angle (I don't have an update() yet, so I'll
-        // need to do it in show()).
-        this.angle
         // We're going to be drawing a sine wave, so we need beginShape() and
         // endShape().
         beginShape()
@@ -31,10 +33,14 @@ class wave {
         for (let i = 0; i < width; i++) {
             // here, we're going to be drawing our sine wave with all the
             // properties.
-            vertex(i, this.amp*
-                sin(TAU/this.T * (this.angle + map(i, 0, width, 0, this.T*this.n) + this.shift)) + this.average)
+            vertex(i, this.getValue(i))
         }
         endShape()
+    }
+
+    getValue(t) {
+        return this.amp*sin(TAU/this.T * (this.angle + map(t, 0, width, 0,
+                this.T*this.n) + this.shift)) + this.average
     }
 }
 
