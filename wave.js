@@ -1,13 +1,13 @@
 
 class wave {
-    constructor(n, shift, amp) {
+    constructor(n, shift, amp, c) {
 
         // All sine waves need an angle!
         this.angle = 0
         // our average y. It's useful as the constant in the way we normally
         // write a sine or cosine formula: amplitude * sin|cos(ω(x+c)) +
         // average y. You can see average y in there!
-        this.average = height/2
+        this.average = 0
         // If we want n=1, we would want the period to be 2 times our width,
         // because then we would get nodes at both endpoints but not at
         // anything else, and it divides by n.
@@ -17,30 +17,36 @@ class wave {
         this.shift = shift
         // All sinusoidal waves have an amplitude!
         this.amp = amp
+        // And we should also include a color.
+        this.c = c
     }
 
-    update() {
+    update(toTheRight) {
         // We should update angle.
-        this.angle += 1
+        if (toTheRight) {
+            this.angle += 1
+        } else {
+            this.angle -= 1
+        }
     }
 
     show() {
         // We're going to be drawing a sine wave, so we need beginShape() and
         // endShape().
         beginShape()
-        stroke(0, 0, 100)
+        stroke(this.c)
         noFill()
         for (let i = 0; i < width; i++) {
             // here, we're going to be drawing our sine wave with all the
             // properties.
-            vertex(i, this.getValue(i))
+            vertex(i, this.getValue(i) + this.average)
         }
         endShape()
     }
 
     getValue(t) {
         return this.amp*sin(TAU/this.T * (this.angle + map(t, 0, width, 0,
-                this.T*this.n) + this.shift)) + this.average
+                this.T*this.n) + this.shift))
     }
 }
 
